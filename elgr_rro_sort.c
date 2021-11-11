@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <time.h>
 
-int fileOpener(int n_arquivo){
+int* fileOpener(int n_arquivo){
     int values[n_arquivo];
+    int* apontando = malloc(n_arquivo * sizeof(int));
+    
     int value;
     int i = 0;
     FILE *file;
@@ -28,13 +30,14 @@ int fileOpener(int n_arquivo){
     if(file == NULL){
         printf("nao foi possivel abrir o arquivo\n");
     } else {
-        while((fscanf(file,"%d", &value))!= EOF){
-            printf("%d\n", value);
+        while((fscanf(file,"%d", value))!= EOF){
             values[i] = value;
             i++;
         }
         fclose(file);
+
     }
+    return apontando;    
 }
 
 void insertionSort(int n_arquivo, int values[]){
@@ -55,7 +58,13 @@ void insertionSort(int n_arquivo, int values[]){
 }
 
 int main(void){
-    int n = 1000;
-    fileOpener(n);
+    int n = 1000, i;
+    int* retorno = fileOpener(n);
+
+    for (i = 0; i < n; i++){
+        printf("%d ", retorno[i]);
+    }
+    
     return 0;
+    //lembrar de dar o free na lista dinamicamente alocada
 }
