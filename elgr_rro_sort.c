@@ -19,16 +19,35 @@ void insertionSort(int n_arquivo, int values[]){
   }
 }
 
+void bubbleSort(int n_arquivo, int values[]){
+    int cont_1 = 0, aux;
+    int troca = 1;
+
+
+    while (troca == 1) {
+        troca = 0;
+        for (cont_1 = 0; cont_1 < n_arquivo - 1; cont_1++) {
+            if (values[cont_1] > values[cont_1 + 1]) {
+                aux = values[cont_1];
+                values[cont_1] = values[cont_1 + 1];
+                values[cont_1 + 1] = aux;
+                troca = 1;
+            }
+        }
+    }
+    return;
+}
+
 
 int main(void){
     int n_algoritmo;
     int n_arquivo;
-    printf("Olá usuário, aqui estão os algotimos que podem ser usados: ");
+    printf("Ola usuario, aqui estao os algotimos que podem ser usados: ");
     printf("\n1 - Insertion Sort\n2 - Selction Sort\n3 - Bubble Sort\n4 - Heap Sort\n");
     printf("Digite o numero correspondente ao algoritmo que voce deseja que seja usado:\n");
     scanf("%d", &n_algoritmo);
 
-    printf("\nDigite o número correspondente ao tamanho de arquivo que você deseja que seja usado: ");
+    printf("\nDigite o numero correspondente ao tamanho de arquivo que voce deseja que seja usado: ");
     printf("\n1000\n5000\n10000\n20000\n50000\n75000\n100000:\n");
     scanf("%d", &n_arquivo);
 
@@ -48,6 +67,9 @@ int main(void){
     else if (n_arquivo == 20000){
         file = fopen("arquivos/20000.txt", "r");
     } 
+    else if (n_arquivo == 50000){
+        file = fopen("arquivos/50000.txt", "r");
+    } 
     else if (n_arquivo == 75000){
         file = fopen("arquivos/75000.txt", "r");
     } 
@@ -62,10 +84,28 @@ int main(void){
             values[i] = value;
             i++;
         }
+        i = 0;
         fclose(file);
-
     }
 
+    if (n_algoritmo == 1){
+        clock_t time;
+        time = clock();
+        insertionSort(n_arquivo, values);
+        time = clock() - time;
+        double total = ((double)time)/CLOCKS_PER_SEC;
+        printf("Insertion = %f\n", total);
+        
+    }
+    else if(n_algoritmo == 2){
+
+    }
+    else if(n_algoritmo == 3){
+
+    }
+    else if(n_algoritmo == 4){
+
+    } 
 
     return 0;
 }
