@@ -19,7 +19,7 @@ void insertionSort(int n_arquivo, int values[]){
   }
 }
 
-void SelSort(int n_arquivo, int values[]){
+void selectionSort(int n_arquivo, int values[]){
     int i;
     int j;
     int position;
@@ -75,6 +75,7 @@ int main(void){
     int value;
     int i = 0;
     FILE *file;
+    clock_t time;
 
     if (n_arquivo == 1000){
         file = fopen("arquivos/1000.txt", "r");
@@ -109,7 +110,6 @@ int main(void){
     }
 
     if (n_algoritmo == 1){
-        clock_t time;
         time = clock();
         insertionSort(n_arquivo, values);
         time = clock() - time;
@@ -118,16 +118,14 @@ int main(void){
     }
 
     else if(n_algoritmo == 2){
-        clock_t time;
         time = clock();
-        SelSort(n_arquivo, values);
+        selectionSort(n_arquivo, values);
         time = clock() - time;
         double total = ((double)time)/CLOCKS_PER_SEC;
         printf("Selection Sort = %f\n", total);
     }
 
     else if(n_algoritmo == 3){
-        clock_t time;
         time = clock();
         bubbleSort(n_arquivo, values);
         time = clock() - time;
