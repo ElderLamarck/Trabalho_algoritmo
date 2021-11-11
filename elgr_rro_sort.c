@@ -94,14 +94,19 @@ int main(void){
         insertionSort(n_arquivo, values);
         time = clock() - time;
         double total = ((double)time)/CLOCKS_PER_SEC;
-        printf("Insertion = %f\n", total);
+        printf("insertionSort = %f\n", total);
         
     }
     else if(n_algoritmo == 2){
 
     }
     else if(n_algoritmo == 3){
-
+        clock_t time;
+        time = clock();
+        bubbleSort(n_arquivo, values);
+        time = clock() - time;
+        double total = ((double)time)/CLOCKS_PER_SEC;
+        printf("bubbleSort = %f\n", total);
     }
     else if(n_algoritmo == 4){
 
