@@ -33,8 +33,8 @@ int fileOpener(int n_arquivo){
             values[i] = value;
             i++;
         }
+        fclose(file);
     }
-    
 }
 
 void insertionSort(int n_arquivo, int values[]){
