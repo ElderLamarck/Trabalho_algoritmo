@@ -8,15 +8,15 @@ void insertionSort(int n_arquivo, int values[]){
     int i;
 
     for (step = 1; step < n_arquivo; step++){
-    temp = values[step];
-    i = step - 1;
+        temp = values[step];
+        i = step - 1;
 
-    while (temp < values[i] && i >= 0) {
-      values[i + 1] = values[i];
-      i--;
+        while (temp < values[i] && i >= 0) {
+            values[i + 1] = values[i];
+            i--;
+        }
+        values[i + 1] = temp;
     }
-    values[i + 1] = temp;
-  }
 }
 
 void selectionSort(int n_arquivo, int values[]){
