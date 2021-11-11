@@ -3,6 +3,26 @@
 #include <time.h>
 
 
+void bubbleSort(int n_arquivo, int values[]){
+    int cont_1 = 0, aux;
+    int troca = 1;
+
+
+    while (troca == 1) {
+        troca = 0;
+        for (cont_1 = 0; cont_1 < n_arquivo - 1; cont_1++) {
+            if (values[cont_1] > values[cont_1 + 1]) {
+                aux = values[cont_1];
+                values[cont_1] = values[cont_1 + 1];
+                values[cont_1 + 1] = aux;
+                troca = 1;
+            }
+        }
+    }
+    return;
+}
+
+
 
 
 
@@ -20,7 +40,7 @@ int main(){
     printf("\n1000\n5000\n10000\n20000\n50000\n75000\n100000:\n");
     scanf("%d", &n_arquivo);
     
-
+    
 
     
     
