@@ -19,6 +19,27 @@ void insertionSort(int n_arquivo, int values[]){
   }
 }
 
+void SelSort(int n_arquivo, int values[]){
+    int i;
+    int j;
+    int position;
+    int swap;
+
+    for(i = 0; i < (n_arquivo - 1); i++){
+        position = i;
+        for(j = i + 1; j < n_arquivo; j++){
+            if(values[position] > values[j]){
+                position = j;
+                }
+            }
+        if(position != i){
+            swap = values[i];
+            values[i] = values[position];
+            values[position] = swap;
+        }
+    }
+}
+
 void bubbleSort(int n_arquivo, int values[]){
     int cont_1 = 0, aux;
     int troca = 1;
@@ -35,7 +56,6 @@ void bubbleSort(int n_arquivo, int values[]){
             }
         }
     }
-    return;
 }
 
 
@@ -43,7 +63,7 @@ int main(void){
     int n_algoritmo;
     int n_arquivo;
     printf("Ola usuario, aqui estao os algotimos que podem ser usados: ");
-    printf("\n1 - Insertion Sort\n2 - Selction Sort\n3 - Bubble Sort\n4 - Heap Sort\n");
+    printf("\n1 - Insertion Sort\n2 - Selection Sort\n3 - Bubble Sort\n4 - Heap Sort\n");
     printf("Digite o numero correspondente ao algoritmo que voce deseja que seja usado:\n");
     scanf("%d", &n_algoritmo);
 
@@ -95,11 +115,17 @@ int main(void){
         time = clock() - time;
         double total = ((double)time)/CLOCKS_PER_SEC;
         printf("insertionSort = %f\n", total);
-        
     }
-    else if(n_algoritmo == 2){
 
+    else if(n_algoritmo == 2){
+        clock_t time;
+        time = clock();
+        SelSort(n_arquivo, values);
+        time = clock() - time;
+        double total = ((double)time)/CLOCKS_PER_SEC;
+        printf("Selection Sort = %f\n", total);
     }
+
     else if(n_algoritmo == 3){
         clock_t time;
         time = clock();
@@ -108,9 +134,9 @@ int main(void){
         double total = ((double)time)/CLOCKS_PER_SEC;
         printf("bubbleSort = %f\n", total);
     }
+
     else if(n_algoritmo == 4){
 
-    } 
-
+    }
     return 0;
 }
