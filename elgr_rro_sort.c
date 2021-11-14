@@ -58,6 +58,47 @@ void bubbleSort(int n_arquivo, int values[]){
     }
 }
 
+// Para o heapSort
+
+void max_heapfy(int heap_size, int values[], int i){
+    int largest = heap_size, left, right, aux;
+    
+    left = (2 * i);
+    right = (2 * i) + 1;
+    if (left <= heap_size && values[left] > values[i])
+        largest = left;
+    else
+        largest = i;
+    if (right <= heap_size && values[right] > values[largest])
+        largest = right;
+    if (largest != i) {
+        aux = values[largest];
+        values[largest] = values[i];
+        values[i] = aux;
+        max_heapfy(heap_size, values, largest);
+    }
+}
+
+void build_max_heap(int heap_size, int values[]){
+    int i;
+
+    for (i = (heap_size/2); i >= 0; i--)
+        max_heapfy(heap_size, values, i);
+}
+
+void heapSort (int heap_size, int values[]){
+    int i, aux;
+
+    build_max_heap(heap_size, values);
+    for (i = heap_size; i >= 2; i--) {
+        aux = values[1];
+        values[1] = values[i];
+        values[i] = aux;
+        heap_size = heap_size - 1;
+        max_heapfy(heap_size, values, i);
+    }
+}
+
 
 int main(void){
     int n_algoritmo;
@@ -122,7 +163,7 @@ int main(void){
         selectionSort(n_arquivo, values);
         time = clock() - time;
         double total = ((double)time)/CLOCKS_PER_SEC;
-        printf("Selection Sort = %f\n", total);
+        printf("Selection Sort = %f\n", time);
     }
 
     else if(n_algoritmo == 3){
@@ -134,7 +175,11 @@ int main(void){
     }
 
     else if(n_algoritmo == 4){
-
+        time = clock();
+        heapSort(n_arquivo, values);
+        time = clock() - time;
+        double total = ((double)time)/CLOCKS_PER_SEC;
+        printf("HeapSort = %f\n", total);
     }
     return 0;
 }
