@@ -116,7 +116,8 @@ int main(void){
     int value;
     int i = 0;
     FILE *file;
-    clock_t time;
+    clock_t start;
+    clock_t end;
 
     if (n_arquivo == 1000){
         file = fopen("arquivos/1000.txt", "r");
@@ -151,35 +152,35 @@ int main(void){
     }
 
     if (n_algoritmo == 1){
-        time = clock();
+        start = clock();
         insertionSort(n_arquivo, values);
-        time = clock() - time;
-        double total = ((double)time)/CLOCKS_PER_SEC;
+        end = clock();
+        double total = ((double)(end - start))/CLOCKS_PER_SEC;
         printf("insertionSort = %f\n", total);
     }
 
     else if(n_algoritmo == 2){
-        time = clock();
+        start = clock();
         selectionSort(n_arquivo, values);
-        time = clock() - time;
-        double total = ((double)time)/CLOCKS_PER_SEC;
-        printf("Selection Sort = %f\n", time);
+        end = clock();
+        double total = ((double)(end - start))/CLOCKS_PER_SEC;
+        printf("selectionSort = %f\n", total);
     }
 
     else if(n_algoritmo == 3){
-        time = clock();
+        start = clock();
         bubbleSort(n_arquivo, values);
-        time = clock() - time;
-        double total = ((double)time)/CLOCKS_PER_SEC;
+        end = clock();
+        double total = ((double)(end - start))/CLOCKS_PER_SEC;
         printf("bubbleSort = %f\n", total);
     }
 
     else if(n_algoritmo == 4){
-        time = clock();
+        start = clock();
         heapSort(n_arquivo, values);
-        time = clock() - time;
-        double total = ((double)time)/CLOCKS_PER_SEC;
-        printf("HeapSort = %f\n", total);
+        end = clock();
+        double total = ((double)(end - start))/CLOCKS_PER_SEC;
+        printf("heapSort = %f\n", total);
     }
     return 0;
 }
