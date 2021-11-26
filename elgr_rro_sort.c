@@ -1,141 +1,24 @@
 #include <stdio.h>
 #include <time.h>
 
+void insertionSort(int n_arquivo, int values[]);
 
-void insertionSort(int n_arquivo, int values[]){
-    int step;
-    int temp;
-    int i;
+void selectionSort(int n_arquivo, int values[]);
 
-    for (step = 1; step < n_arquivo; step++){
-        temp = values[step];
-        i = step - 1;
-
-        while (temp < values[i] && i >= 0) {
-            values[i + 1] = values[i];
-            i--;
-        }
-        values[i + 1] = temp;
-    }
-}
-
-void selectionSort(int n_arquivo, int values[]){
-    int i;
-    int j;
-    int position;
-    int swap;
-
-    for(i = 0; i < (n_arquivo - 1); i++){
-        position = i;
-        for(j = i + 1; j < n_arquivo; j++){
-            if(values[position] > values[j]){
-                position = j;
-                }
-            }
-        if(position != i){
-            swap = values[i];
-            values[i] = values[position];
-            values[position] = swap;
-        }
-    }
-}
-
-void bubbleSort(int n_arquivo, int values[]){
-    int cont_1 = 0, aux;
-    int troca = 1;
-
-
-    while (troca == 1) {
-        troca = 0;
-        for (cont_1 = 0; cont_1 < n_arquivo - 1; cont_1++) {
-            if (values[cont_1] > values[cont_1 + 1]) {
-                aux = values[cont_1];
-                values[cont_1] = values[cont_1 + 1];
-                values[cont_1 + 1] = aux;
-                troca = 1;
-            }
-        }
-    }
-}
+void bubbleSort(int n_arquivo, int values[]);
 
 // Para o heapSort
-
-void max_heapfy(int heap_size, int values[], int i){
-    int largest = heap_size, left, right, aux;
-    
-    left = (2 * i);
-    right = (2 * i) + 1;
-    if (left <= heap_size && values[left] > values[i])
-        largest = left;
-    else
-        largest = i;
-    if (right <= heap_size && values[right] > values[largest])
-        largest = right;
-    if (largest != i) {
-        aux = values[largest];
-        values[largest] = values[i];
-        values[i] = aux;
-        max_heapfy(heap_size, values, largest);
-    }
-}
-
-void build_max_heap(int heap_size, int values[]){
-    int i;
-
-    for (i = (heap_size/2); i >= 0; i--)
-        max_heapfy(heap_size, values, i);
-}
-
-void heapSort (int heap_size, int values[]){
-    int i, aux;
-
-    build_max_heap(heap_size, values);
-    for (i = heap_size; i >= 2; i--) {
-        aux = values[1];
-        values[1] = values[i];
-        values[i] = aux;
-        heap_size = heap_size - 1;
-        max_heapfy(heap_size, values, i);
-    }
-}
+void max_heapfy(int heap_size, int values[], int i);
+void build_max_heap(int heap_size, int values[]);
+void heapSort (int heap_size, int values[]);
 
 // Para o quicksort
+int partition (int values[], int start, int end);
+void quickSort (int values[], int initial, int final);
 
-
-
-int partition (int values[], int start, int end){
-    int pivo = values[end];
-    int menor_piv, j = start;
-
-    for (int cont = start; cont < end; cont++) {
-        if (values[cont] <= pivo) {
-            menor_piv = values[j];
-            values[j] = values[cont];
-            values[cont] = menor_piv;
-            j++;
-        }
-    }
-    menor_piv = values[j];
-    values[j] = values[end];
-    values[end] = menor_piv;
-    return j;
-}
-
-
-
-void quickSort (int values[], int initial, int final) {
-    if (initial < final) {
-        int middle = partition (values, initial, final);
-        quickSort (values, initial, middle - 1);
-        quickSort (values, middle + 1, final);
-    }
-}
-
-
-
-
-
-
+// para merge sort
+void merge(int Arr[], int start, int mid, int end);
+void mergeSort(int Arr[], int start, int end);
 
 
 int main(void){
@@ -221,13 +104,17 @@ int main(void){
         printf("heapSort = %f\n", total);
     }
 
-    // else if(n_algoritmo == 5){
-    //     start = clock();
-    //     mergeSort
-    //     end = clock();
-    //     double total = ((double)(end - start))/CLOCKS_PER_SEC;
-    //     printf("mergeSort = %f\n", total);
-    // }
+    else if(n_algoritmo == 5){
+        start = clock();
+        mergeSort(values, 0, n_arquivo - 1);
+        end = clock();
+        double total = ((double)(end - start))/CLOCKS_PER_SEC;
+        printf("mergeSort = %f\n", total);
+
+        for(i = 0; i <= (n_arquivo - 1); i++){
+            printf("%d ", values[i]);
+        }
+    }
 
     else if(n_algoritmo == 6){
         start = clock();
@@ -237,4 +124,180 @@ int main(void){
         printf("quickSort = %f\n", total);
     }
     return 0;
+}
+
+
+void insertionSort(int n_arquivo, int values[]){
+    int step;
+    int temp;
+    int i;
+
+    for (step = 1; step < n_arquivo; step++){
+        temp = values[step];
+        i = step - 1;
+
+        while (temp < values[i] && i >= 0) {
+            values[i + 1] = values[i];
+            i--;
+        }
+        values[i + 1] = temp;
+    }
+}
+
+void selectionSort(int n_arquivo, int values[]){
+    int i;
+    int j;
+    int position;
+    int swap;
+
+    for(i = 0; i < (n_arquivo - 1); i++){
+        position = i;
+        for(j = i + 1; j < n_arquivo; j++){
+            if(values[position] > values[j]){
+                position = j;
+                }
+            }
+        if(position != i){
+            swap = values[i];
+            values[i] = values[position];
+            values[position] = swap;
+        }
+    }
+}
+
+void bubbleSort(int n_arquivo, int values[]){
+    int cont_1 = 0, aux;
+    int troca = 1;
+
+    while (troca == 1) {
+        troca = 0;
+        for (cont_1 = 0; cont_1 < n_arquivo - 1; cont_1++) {
+            if (values[cont_1] > values[cont_1 + 1]) {
+                aux = values[cont_1];
+                values[cont_1] = values[cont_1 + 1];
+                values[cont_1 + 1] = aux;
+                troca = 1;
+            }
+        }
+    }
+}
+
+
+// Para o heapSort
+void max_heapfy(int heap_size, int values[], int i){
+    int largest = heap_size, left, right, aux;
+    
+    left = (2 * i);
+    right = (2 * i) + 1;
+    if (left <= heap_size && values[left] > values[i])
+        largest = left;
+    else
+        largest = i;
+    if (right <= heap_size && values[right] > values[largest])
+        largest = right;
+    if (largest != i) {
+        aux = values[largest];
+        values[largest] = values[i];
+        values[i] = aux;
+        max_heapfy(heap_size, values, largest);
+    }
+}
+
+void build_max_heap(int heap_size, int values[]){
+    int i;
+
+    for (i = (heap_size/2); i >= 0; i--)
+        max_heapfy(heap_size, values, i);
+}
+
+void heapSort (int heap_size, int values[]){
+    int i, aux;
+
+    build_max_heap(heap_size, values);
+    for (i = heap_size; i >= 2; i--) {
+        aux = values[1];
+        values[1] = values[i];
+        values[i] = aux;
+        heap_size = heap_size - 1;
+        max_heapfy(heap_size, values, i);
+    }
+}
+
+
+// Para o quicksort
+int partition (int values[], int start, int end){
+    int pivo = values[end];
+    int menor_piv, j = start;
+
+    for (int cont = start; cont < end; cont++) {
+        if (values[cont] <= pivo) {
+            menor_piv = values[j];
+            values[j] = values[cont];
+            values[cont] = menor_piv;
+            j++;
+        }
+    }
+    menor_piv = values[j];
+    values[j] = values[end];
+    values[end] = menor_piv;
+    return j;
+}
+
+void quickSort (int values[], int initial, int final) {
+    if (initial < final) {
+        int middle = partition (values, initial, final);
+        quickSort (values, initial, middle - 1);
+        quickSort (values, middle + 1, final);
+    }
+}
+
+
+// para merge sort
+void merge(int Arr[], int start, int mid, int end)
+{
+    int temp[end - start + 1];
+
+    int i = start, j = mid + 1, k = 0;
+    while (i <= mid && j <= end)
+    {
+        if (Arr[i] <= Arr[j])
+        {
+            temp[k] = Arr[i];
+            k += 1;
+            i += 1;
+        }
+        else
+        {
+            temp[k] = Arr[j];
+            k += 1;
+            j += 1;
+        }
+    }
+    while (i <= mid)
+    {
+        temp[k] = Arr[i];
+        k += 1;
+        i += 1;
+    }
+    while (j <= end)
+    {
+        temp[k] = Arr[j];
+        k += 1;
+        j += 1;
+    }
+    for (i = start; i <= end; i += 1)
+    {
+        Arr[i] = temp[i - start];
+    }
+}
+
+void mergeSort(int Arr[], int start, int end)
+{
+    if (start < end)
+    {
+        int mid = (start + end) / 2;
+        mergeSort(Arr, start, mid);
+        mergeSort(Arr, mid + 1, end);
+        merge(Arr, start, mid, end);
+    }
 }
