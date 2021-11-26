@@ -99,12 +99,50 @@ void heapSort (int heap_size, int values[]){
     }
 }
 
+// Para o quicksort
+
+
+
+int partition (int values[], int start, int end){
+    int pivo = values[end];
+    int menor_piv, j = start;
+
+    for (int cont = start; cont < end; cont++) {
+        if (values[cont] <= pivo) {
+            menor_piv = values[j];
+            values[j] = values[cont];
+            values[cont] = menor_piv;
+            j++;
+        }
+    }
+    menor_piv = values[j];
+    values[j] = values[end];
+    values[end] = menor_piv;
+    return j;
+}
+
+
+
+void quickSort (int values[], int initial, int final) {
+    if (initial < final) {
+        int middle = partition (values, initial, final);
+        quickSort (values, initial, middle - 1);
+        quickSort (values, middle + 1, final);
+    }
+}
+
+
+
+
+
+
+
 
 int main(void){
     int n_algoritmo;
     int n_arquivo;
-    printf("Ola usuario, aqui estao os algotimos que podem ser usados: ");
-    printf("\n1 - Insertion Sort\n2 - Selection Sort\n3 - Bubble Sort\n4 - Heap Sort\n");
+    printf("Ola usuario, aqui estao os algoritimos que podem ser usados: ");
+    printf("\n1 - Insertion Sort\n2 - Selection Sort\n3 - Bubble Sort\n4 - Heap Sort\n5 - Merge Sort\n6 - Quick Sort\n");
     printf("Digite o numero correspondente ao algoritmo que voce deseja que seja usado:\n");
     scanf("%d", &n_algoritmo);
 
@@ -181,6 +219,22 @@ int main(void){
         end = clock();
         double total = ((double)(end - start))/CLOCKS_PER_SEC;
         printf("heapSort = %f\n", total);
+    }
+
+    // else if(n_algoritmo == 5){
+    //     start = clock();
+    //     mergeSort
+    //     end = clock();
+    //     double total = ((double)(end - start))/CLOCKS_PER_SEC;
+    //     printf("mergeSort = %f\n", total);
+    // }
+
+    else if(n_algoritmo == 6){
+        start = clock();
+        quickSort(values, 0, n_arquivo - 1);
+        end = clock();
+        double total = ((double)(end - start))/CLOCKS_PER_SEC;
+        printf("quickSort = %f\n", total);
     }
     return 0;
 }
