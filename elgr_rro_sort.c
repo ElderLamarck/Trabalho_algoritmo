@@ -110,10 +110,6 @@ int main(void){
         end = clock();
         double total = ((double)(end - start))/CLOCKS_PER_SEC;
         printf("mergeSort = %f\n", total);
-
-        for(i = 0; i <= (n_arquivo - 1); i++){
-            printf("%d ", values[i]);
-        }
     }
 
     else if(n_algoritmo == 6){
